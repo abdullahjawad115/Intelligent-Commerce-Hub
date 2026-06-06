@@ -1,37 +1,39 @@
-@import url('https://fonts.googleapis.com/css2?family=DM+Mono:ital,wght@0,300;0,400;0,500;1,400&family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap');
 
 :root {
-  --ink: #111110;
-  --ink-2: #3A3A38;
-  --ink-3: #6B6B68;
-  --paper: #F2EDE4;
-  --paper-2: #E8E3D9;
-  --paper-3: #DEDAD0;
-  --border: rgba(17, 17, 16, 0.18);
-  --border-strong: rgba(17, 17, 16, 0.5);
-  --green: #1E5C40;
-  --green-bg: #EBF4EE;
-  --amber: #8B4A0A;
-  --amber-bg: #FBF0E4;
-  --red: #7A1515;
-  --red-bg: #F6EAEA;
-  --blue: #1A356B;
-  --blue-bg: #EBF0FA;
-  --font-mono: 'DM Mono', monospace;
-  --font-serif: 'Fraunces', serif;
+  --bg:           #080E1A;
+  --surface:      #0F1829;
+  --surface-2:    #172034;
+  --surface-3:    #1E2A42;
+  --border:       rgba(255,255,255,0.07);
+  --border-m:     rgba(255,255,255,0.12);
+  --border-s:     rgba(255,255,255,0.20);
+  --text:         #E4E9F2;
+  --text-2:       #8494B0;
+  --text-3:       #3D5070;
+  --accent:       #E8A020;
+  --accent-dim:   rgba(232,160,32,0.14);
+  --accent-dark:  rgba(232,160,32,0.08);
+  --green:        #2DB87A;
+  --green-dim:    rgba(45,184,122,0.12);
+  --red:          #E85858;
+  --red-dim:      rgba(232,88,88,0.12);
+  --amber:        #E89820;
+  --amber-dim:    rgba(232,152,32,0.12);
+  --blue:         #4A9EE8;
+  --blue-dim:     rgba(74,158,232,0.12);
+  --font: 'Space Grotesk', -apple-system, sans-serif;
 }
 
-* {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
-}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
 body {
-  font-family: var(--font-mono);
-  background: var(--paper);
-  color: var(--ink);
+  font-family: var(--font);
+  background: var(--bg);
+  color: var(--text);
   font-size: 13px;
   line-height: 1.5;
   -webkit-font-smoothing: antialiased;
 }
+
+button { font-family: var(--font); cursor: pointer; }

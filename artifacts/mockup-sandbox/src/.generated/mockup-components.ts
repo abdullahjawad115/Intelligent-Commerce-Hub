@@ -5,5 +5,7 @@ export const modules: ModuleMap = {
   "./components/mockups/modus/Integrations.tsx": () => import("../components/mockups/modus/Integrations.tsx"),
   "./components/mockups/modus/Inventory.tsx": () => import("../components/mockups/modus/Inventory.tsx"),
   "./components/mockups/modus/Onboarding.tsx": () => import("../components/mockups/modus/Onboarding.tsx"),
-  "./components/mockups/modus/Recommendations.tsx": () => import("../components/mockups/modus/Recommendations.tsx")
+  "./components/mockups/modus/PrintAll.tsx": () => import("../components/mockups/modus/PrintAll.tsx"),
+  "./components/mockups/modus/Recommendations.tsx": () => import("../components/mockups/modus/Recommendations.tsx"),
+  "./components/mockups/modus/Sales.tsx": () => import("../components/mockups/modus/Sales.tsx")
 };
