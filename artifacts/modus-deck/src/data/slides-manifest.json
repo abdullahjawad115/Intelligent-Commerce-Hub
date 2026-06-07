@@ -1,1 +1,82 @@
-[]
+[
+  {
+    "id": "a1b2c3d4-e5f6-7890-abcd-ef1234567801",
+    "position": 1,
+    "filepath": "src/pages/slides/Slide01Title.tsx",
+    "title": "Modus — Intelligent Commerce. Unified.",
+    "description": "Title slide with tagline, core stats, and category overview.",
+    "speakerNotes": ""
+  },
+  {
+    "id": "a1b2c3d4-e5f6-7890-abcd-ef1234567802",
+    "position": 2,
+    "filepath": "src/pages/slides/Slide02Problem.tsx",
+    "title": "The Inventory Intelligence Gap",
+    "description": "Three structural problems: siloed tools, carrying costs, and the missing synthesis layer between inventory and customer data.",
+    "speakerNotes": ""
+  },
+  {
+    "id": "a1b2c3d4-e5f6-7890-abcd-ef1234567803",
+    "position": 3,
+    "filepath": "src/pages/slides/Slide03Platform.tsx",
+    "title": "The Platform",
+    "description": "The four-layer pipeline: Ingest, Process, Synthesise, Deliver.",
+    "speakerNotes": ""
+  },
+  {
+    "id": "a1b2c3d4-e5f6-7890-abcd-ef1234567804",
+    "position": 4,
+    "filepath": "src/pages/slides/Slide04WhoItServes.tsx",
+    "title": "Market",
+    "description": "Who Modus serves: e-commerce, wholesale, specialist verticals, and new operators.",
+    "speakerNotes": ""
+  },
+  {
+    "id": "a1b2c3d4-e5f6-7890-abcd-ef1234567805",
+    "position": 5,
+    "filepath": "src/pages/slides/Slide05Pricing.tsx",
+    "title": "Business Model",
+    "description": "Four pricing tiers — Starter (free), Growth ($49), Pro ($99), Enterprise (custom) — plus Manufacturing Add-on.",
+    "speakerNotes": ""
+  },
+  {
+    "id": "a1b2c3d4-e5f6-7890-abcd-ef1234567806",
+    "position": 6,
+    "filepath": "src/pages/slides/Slide06Revenue.tsx",
+    "title": "Revenue Projections",
+    "description": "Three-year path: $156K ARR (Y1), $691K ARR (Y2), $2.4M ARR (Y3).",
+    "speakerNotes": ""
+  },
+  {
+    "id": "a1b2c3d4-e5f6-7890-abcd-ef1234567807",
+    "position": 7,
+    "filepath": "src/pages/slides/Slide07GoToMarket.tsx",
+    "title": "Go-To-Market",
+    "description": "First 200 merchants via direct outreach, beta programme, and App Store. Three funding phases.",
+    "speakerNotes": ""
+  },
+  {
+    "id": "a1b2c3d4-e5f6-7890-abcd-ef1234567808",
+    "position": 8,
+    "filepath": "src/pages/slides/Slide08Manufacturing.tsx",
+    "title": "Manufacturing Add-on — Phase 2",
+    "description": "$79/mo add-on: BOM tracking, WIP status board, batch traceability, AI production run recommendations.",
+    "speakerNotes": ""
+  },
+  {
+    "id": "a1b2c3d4-e5f6-7890-abcd-ef1234567809",
+    "position": 9,
+    "filepath": "src/pages/slides/Slide09Vision.tsx",
+    "title": "Long-Term Vision",
+    "description": "The intelligence operating system for any product-based business. First-mover position, data moat, and complementary positioning.",
+    "speakerNotes": ""
+  },
+  {
+    "id": "a1b2c3d4-e5f6-7890-abcd-ef1234567810",
+    "position": 10,
+    "filepath": "src/pages/slides/Slide10Closing.tsx",
+    "title": "Modus — Intelligent Commerce. Unified.",
+    "description": "Closing slide with tagline and key facts.",
+    "speakerNotes": ""
+  }
+]
