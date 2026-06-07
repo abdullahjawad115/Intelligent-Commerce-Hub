@@ -1,22 +1,20 @@
 import { Link, useLocation } from "wouter";
 import { RefreshCw, Factory } from "lucide-react";
-import { useManufacturing } from "@/context/ManufacturingContext";
+
+const NAV = [
+  { name: 'Dashboard',       path: '/dashboard'       },
+  { name: 'Sales',           path: '/sales'           },
+  { name: 'Recommendations', path: '/recommendations' },
+  { name: 'Inventory',       path: '/inventory'       },
+  { name: 'Manufacturing',   path: '/manufacturing',  addon: true },
+  { name: 'Integrations',    path: '/integrations'   },
+];
 
 export function TopBar() {
   const [location] = useLocation();
-  const { hasManufacturing } = useManufacturing();
-
-  const NAV = [
-    { name: 'Dashboard',       path: '/dashboard'       },
-    { name: 'Sales',           path: '/sales'           },
-    { name: 'Recommendations', path: '/recommendations' },
-    { name: 'Inventory',       path: '/inventory'       },
-    { name: 'Integrations',    path: '/integrations'    },
-    ...(hasManufacturing ? [{ name: 'Manufacturing', path: '/manufacturing', addon: true }] : []),
-  ] as Array<{ name: string; path: string; addon?: boolean }>;
 
   return (
-    <div style={{ height: 52, borderBottom: '1px solid var(--border)', display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '0 32px', background: 'var(--surface)', flexShrink: 0 }}>
+    <div style={{ height: 52, borderBottom: '1px solid var(--border)', display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '0 24px', background: 'var(--surface)', flexShrink: 0 }}>
       <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
         <span style={{ fontSize: 18, fontWeight: 700, letterSpacing: '-0.5px' }}>MODUS</span>
         <span style={{ width: 1, height: 14, background: 'var(--border-m)' }} />
@@ -37,7 +35,7 @@ export function TopBar() {
                   gap: 5,
                   fontSize: 11,
                   fontWeight: 500,
-                  padding: '0 14px',
+                  padding: '0 12px',
                   height: 52,
                   background: 'none',
                   borderBottom: isActive ? '2px solid var(--accent-col)' : '2px solid transparent',
