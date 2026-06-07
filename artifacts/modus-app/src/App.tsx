@@ -10,6 +10,8 @@ import { Sales } from "@/pages/Sales";
 import { Recommendations } from "@/pages/Recommendations";
 import { Inventory } from "@/pages/Inventory";
 import { Integrations } from "@/pages/Integrations";
+import { Manufacturing } from "@/pages/Manufacturing";
+import { ManufacturingProvider } from "@/context/ManufacturingContext";
 
 const queryClient = new QueryClient();
 
@@ -22,6 +24,7 @@ function Router() {
       <Route path="/recommendations" component={Recommendations} />
       <Route path="/inventory" component={Inventory} />
       <Route path="/integrations" component={Integrations} />
+      <Route path="/manufacturing" component={Manufacturing} />
       <Route component={NotFound} />
     </Switch>
   );
@@ -31,9 +34,11 @@ function App() {
   return (
     <QueryClientProvider client={queryClient}>
       <TooltipProvider>
-        <WouterRouter base={import.meta.env.BASE_URL.replace(/\/$/, "")}>
-          <Router />
-        </WouterRouter>
+        <ManufacturingProvider>
+          <WouterRouter base={import.meta.env.BASE_URL.replace(/\/$/, "")}>
+            <Router />
+          </WouterRouter>
+        </ManufacturingProvider>
         <Toaster />
       </TooltipProvider>
     </QueryClientProvider>

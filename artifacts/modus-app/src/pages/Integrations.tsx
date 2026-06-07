@@ -1,6 +1,8 @@
 import { useState } from 'react';
-import { Plus, ShoppingBag, Mail, Package, Globe } from 'lucide-react';
+import { Plus, ShoppingBag, Mail, Package, Globe, Factory, Check, ChevronRight } from 'lucide-react';
 import { TopBar } from '@/components/TopBar';
+import { useManufacturing } from '@/context/ManufacturingContext';
+import { useLocation } from 'wouter';
 
 const INTEGRATIONS = [
   { id:'shopify',    name:'Shopify',           icon:ShoppingBag, type:'Primary Platform', synced:'3 min ago',   points:['Orders','Products','Customers','Inventory'], required:true },
@@ -24,10 +26,29 @@ const PLAN = {
   features:['AI Recommendation Engine','Bundle Intelligence','Seasonal Demand Model','Velocity Alerts','Auto-Reorder Suggestions','Priority support','API access'],
 };
 
+const MFG_CAPABILITIES = [
+  'BOM tracking & component costing',
+  'WIP status board across production stages',
+  'Batch & lot traceability with certifications',
+  'AI production run recommendations',
+  'Guided onboarding & ERP connector',
+];
+
 export function Integrations() {
   const [enabled, setEnabled] = useState<Record<FeatureKey,boolean>>({
     rec_engine:true, bundle_ai:true, seasonal_model:true, velocity_alerts:true, auto_reorder:false,
   });
+  const [activating, setActivating] = useState(false);
+  const { hasManufacturing, activate, deactivate } = useManufacturing();
+  const [, navigate] = useLocation();
+
+  function handleActivate() {
+    setActivating(true);
+    setTimeout(() => {
+      activate();
+      setActivating(false);
+    }, 1200);
+  }
 
   return (
     <div style={{ display:'flex', flexDirection:'column', height:'100vh', background:'var(--bg)', overflow:'hidden' }}>
@@ -62,7 +83,7 @@ export function Integrations() {
                         </div>
                       </div>
                     </div>
-                    <button data-testid={`btn-manage-${intg.id}`} style={{ fontSize:11, fontWeight:500, padding:'6px 14px', border:'1px solid var(--border-m)', background:'transparent', color:'var(--text-2)', borderRadius:4 }}>Manage</button>
+                    <button data-testid={`btn-manage-${intg.id}`} style={{ fontSize:11, fontWeight:500, padding:'6px 14px', border:'1px solid var(--border-m)', background:'transparent', color:'var(--text-2)', borderRadius:4, cursor:'pointer' }}>Manage</button>
                   </div>
                   <div style={{ display:'flex', gap:6, flexWrap:'wrap' }}>
                     {intg.points.map(pt=>(
@@ -74,7 +95,7 @@ export function Integrations() {
             })}
           </div>
 
-          <button data-testid="btn-add-integration" style={{ fontSize:12, fontWeight:500, padding:'14px 20px', border:'1px dashed var(--border-m)', background:'transparent', color:'var(--text-2)', borderRadius:6, width:'100%', display:'flex', alignItems:'center', justifyContent:'center', gap:8 }}>
+          <button data-testid="btn-add-integration" style={{ fontSize:12, fontWeight:500, padding:'14px 20px', border:'1px dashed var(--border-m)', background:'transparent', color:'var(--text-2)', borderRadius:6, width:'100%', display:'flex', alignItems:'center', justifyContent:'center', gap:8, cursor:'pointer' }}>
             <Plus size={13}/> Add integration
           </button>
         </div>
@@ -124,9 +145,79 @@ export function Integrations() {
               ))}
             </div>
             <div style={{ display:'flex', gap:8 }}>
-              <button data-testid="btn-manage-billing" style={{ fontSize:11, fontWeight:500, padding:'8px 0', border:'1px solid var(--border-m)', background:'transparent', color:'var(--text-2)', borderRadius:4, flex:1 }}>Manage billing</button>
-              <button data-testid="btn-enterprise" style={{ fontSize:11, fontWeight:600, padding:'8px 0', border:'none', background:'var(--accent-col)', color:'#0B0A08', borderRadius:4, flex:1 }}>→ Enterprise</button>
+              <button data-testid="btn-manage-billing" style={{ fontSize:11, fontWeight:500, padding:'8px 0', border:'1px solid var(--border-m)', background:'transparent', color:'var(--text-2)', borderRadius:4, flex:1, cursor:'pointer' }}>Manage billing</button>
+              <button data-testid="btn-enterprise" style={{ fontSize:11, fontWeight:600, padding:'8px 0', border:'none', background:'var(--accent-col)', color:'#0B0A08', borderRadius:4, flex:1, cursor:'pointer' }}>→ Enterprise</button>
             </div>
+          </div>
+
+          {/* Manufacturing Add-on Card */}
+          <div style={{
+            border: hasManufacturing ? '1px solid var(--accent-dim)' : '1px solid var(--border-m)',
+            background: hasManufacturing ? 'var(--accent-dark)' : 'var(--surface)',
+            padding:'18px 18px',
+            borderRadius:6,
+            position:'relative',
+            overflow:'hidden',
+          }}>
+            {!hasManufacturing && (
+              <div style={{ position:'absolute', top:0, right:0, background:'var(--surface-3)', padding:'4px 10px', fontSize:9, fontWeight:700, color:'var(--text-2)', letterSpacing:'0.07em', borderBottomLeftRadius:6 }}>ADD-ON</div>
+            )}
+            <div style={{ display:'flex', alignItems:'center', gap:10, marginBottom:10 }}>
+              <div style={{ width:36, height:36, borderRadius:8, background: hasManufacturing ? 'rgba(232,160,32,0.15)' : 'var(--surface-2)', border:`1px solid ${hasManufacturing ? 'var(--accent-dim)' : 'var(--border-m)'}`, display:'flex', alignItems:'center', justifyContent:'center' }}>
+                <Factory size={15} color={hasManufacturing ? 'var(--accent-col)' : 'var(--text-2)'} />
+              </div>
+              <div>
+                <div style={{ fontSize:14, fontWeight:700, marginBottom:2 }}>Manufacturing Intelligence</div>
+                <div style={{ display:'flex', alignItems:'baseline', gap:4 }}>
+                  <span style={{ fontSize:18, fontWeight:700, color: hasManufacturing ? 'var(--accent-col)' : 'var(--text)' }}>$79</span>
+                  <span style={{ fontSize:11, color:'var(--text-3)' }}>+/month · Growth or Pro</span>
+                </div>
+              </div>
+            </div>
+
+            <div style={{ display:'flex', flexDirection:'column', gap:7, marginBottom:16 }}>
+              {MFG_CAPABILITIES.map(cap => (
+                <div key={cap} style={{ display:'flex', alignItems:'flex-start', gap:8, fontSize:12 }}>
+                  <Check size={12} color={hasManufacturing ? 'var(--accent-col)' : 'var(--text-3)'} style={{ flexShrink:0, marginTop:1 }} />
+                  <span style={{ color: hasManufacturing ? 'var(--text-2)' : 'var(--text-3)' }}>{cap}</span>
+                </div>
+              ))}
+            </div>
+
+            {hasManufacturing ? (
+              <div style={{ display:'flex', gap:8 }}>
+                <button
+                  onClick={() => navigate('/manufacturing')}
+                  style={{ flex:1, fontSize:12, fontWeight:700, padding:'9px 0', background:'var(--accent-col)', color:'#0B0A08', border:'none', borderRadius:4, cursor:'pointer', display:'flex', alignItems:'center', justifyContent:'center', gap:6 }}
+                >
+                  <Factory size={12} /> Open Manufacturing
+                </button>
+                <button
+                  onClick={deactivate}
+                  style={{ fontSize:11, fontWeight:500, padding:'9px 12px', background:'transparent', color:'var(--text-3)', border:'1px solid var(--border-m)', borderRadius:4, cursor:'pointer' }}
+                >
+                  Deactivate
+                </button>
+              </div>
+            ) : (
+              <button
+                data-testid="btn-activate-manufacturing"
+                onClick={handleActivate}
+                disabled={activating}
+                style={{ width:'100%', fontSize:12, fontWeight:700, padding:'9px 0', background:'var(--accent-col)', color:'#0B0A08', border:'none', borderRadius:4, cursor: activating ? 'default' : 'pointer', display:'flex', alignItems:'center', justifyContent:'center', gap:6, opacity: activating ? 0.75 : 1 }}
+              >
+                {activating ? (
+                  <>
+                    <span style={{ width:12, height:12, borderRadius:'50%', border:'2px solid #0B0A08', borderTopColor:'transparent', display:'inline-block', animation:'spin 0.7s linear infinite' }} />
+                    Activating…
+                  </>
+                ) : (
+                  <>Add Manufacturing <ChevronRight size={12} /></>
+                )}
+              </button>
+            )}
+
+            <style>{`@keyframes spin { from { transform:rotate(0deg); } to { transform:rotate(360deg); } }`}</style>
           </div>
 
         </div>

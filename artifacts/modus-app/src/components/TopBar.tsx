@@ -1,16 +1,19 @@
 import { Link, useLocation } from "wouter";
-import { RefreshCw } from "lucide-react";
-
-const NAV = [
-  { name: 'Dashboard', path: '/dashboard' },
-  { name: 'Sales', path: '/sales' },
-  { name: 'Recommendations', path: '/recommendations' },
-  { name: 'Inventory', path: '/inventory' },
-  { name: 'Integrations', path: '/integrations' }
-];
+import { RefreshCw, Factory } from "lucide-react";
+import { useManufacturing } from "@/context/ManufacturingContext";
 
 export function TopBar() {
   const [location] = useLocation();
+  const { hasManufacturing } = useManufacturing();
+
+  const NAV = [
+    { name: 'Dashboard',       path: '/dashboard'       },
+    { name: 'Sales',           path: '/sales'           },
+    { name: 'Recommendations', path: '/recommendations' },
+    { name: 'Inventory',       path: '/inventory'       },
+    { name: 'Integrations',    path: '/integrations'    },
+    ...(hasManufacturing ? [{ name: 'Manufacturing', path: '/manufacturing', addon: true }] : []),
+  ] as Array<{ name: string; path: string; addon?: boolean }>;
 
   return (
     <div style={{ height: 52, borderBottom: '1px solid var(--border)', display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '0 32px', background: 'var(--surface)', flexShrink: 0 }}>
@@ -25,7 +28,25 @@ export function TopBar() {
           const isActive = location === n.path;
           return (
             <Link key={n.name} href={n.path}>
-              <span data-testid={`nav-${n.name.toLowerCase()}`} style={{ cursor: 'pointer', display: 'inline-flex', alignItems: 'center', fontSize: 11, fontWeight: 500, padding: '0 14px', height: 52, background: 'none', borderBottom: isActive ? '2px solid var(--accent-col)' : '2px solid transparent', color: isActive ? 'var(--text)' : 'var(--text-3)', letterSpacing: '0.04em', textTransform: 'uppercase' }}>
+              <span
+                data-testid={`nav-${n.name.toLowerCase()}`}
+                style={{
+                  cursor: 'pointer',
+                  display: 'inline-flex',
+                  alignItems: 'center',
+                  gap: 5,
+                  fontSize: 11,
+                  fontWeight: 500,
+                  padding: '0 14px',
+                  height: 52,
+                  background: 'none',
+                  borderBottom: isActive ? '2px solid var(--accent-col)' : '2px solid transparent',
+                  color: isActive ? 'var(--text)' : n.addon ? 'var(--accent-col)' : 'var(--text-3)',
+                  letterSpacing: '0.04em',
+                  textTransform: 'uppercase',
+                }}
+              >
+                {n.addon && <Factory size={10} />}
                 {n.name}
               </span>
             </Link>
